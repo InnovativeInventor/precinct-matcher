@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "precinct-matcher"
 version = "0.1.0"
-description = "Monadic election precinct matcher for gerrymandering research at MGGG"
+description = "Monadic election precinct matcher for gerrymandering data collection and research at MGGG"
 authors = ["Max Fan <theinnovativeinventor@gmail.com>"]
 license = "MIT License"
 
