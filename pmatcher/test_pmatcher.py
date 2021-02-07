@@ -5,15 +5,18 @@ test_primary = [
     "Archbald Ward 01 District 01",
     "BALD EAGLE Voting District",
     "Blakely Ward 01 district 01",
-    "PHILADELPHIA WARD 31 PRECINCT 09"
+    "PHILADELPHIA WARD 31 PRECINCT 09",
 ]
+
 test_secondary = [
-    "abington ward 4 district 2", # combo
-    "Archbald Ward 01 District 01", # exact
-    "BALD EAGLE", # stripping
-    "Blakely Ward 01 District 01", # casing/insensitive
-    "PHILADELPHIA WARD 31 PRECINCT 9" # int conversion/stripping
+    "abington ward 4 district 2",  # combo
+    "Archbald Ward 01 District 01",  # exact
+    "BALD EAGLE",  # stripping
+    "Blakely Ward 01 District 01",  # casing/insensitive
+    "PHILADELPHIA WARD 31 PRECINCT 9",  # int conversion/stripping
 ]
+
+
 def test_init():
     matcher = PrecinctMatcher(test_primary, test_secondary)
 

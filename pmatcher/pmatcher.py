@@ -1,6 +1,7 @@
 from fuzzywuzzy import fuzz, process
 from typing import List
 
+
 class PrecinctMatcher:
     def __init__(self, primary: List[str], secondary: List[str]):
         # Define and strip whitespace
@@ -22,7 +23,6 @@ class PrecinctMatcher:
             return self.weighted_manual()
         else:
             return self.results
-
 
     def exact(self):
         """
@@ -101,11 +101,11 @@ class PrecinctMatcher:
 
         return " ".join(tokens)
 
-    def weighted_manual(self, n = 5):
+    def weighted_manual(self, n=5):
         """
         Interactive, weighted matching with levenshtein distances!
         """
-        matcher = lambda x, y: 100*fuzz.token_set_ratio(x, y) + fuzz.ratio(x, y)
+        matcher = lambda x, y: 100 * fuzz.token_set_ratio(x, y) + fuzz.ratio(x, y)
         normalize = lambda x: self._stripper(x.lower()).title()
 
         normalized_primary = list(map(normalize, self.primary))
@@ -113,7 +113,12 @@ class PrecinctMatcher:
 
         for each_string in normalized_primary:
             print(f"Matching {each_string}:")
-            matches = sorted(process.extract(each_string, normalized_secondary, limit=n, scorer=matcher), key=lambda x: x[1])
+            matches = sorted(
+                process.extract(
+                    each_string, normalized_secondary, limit=n, scorer=matcher
+                ),
+                key=lambda x: x[1],
+            )
             for count, each_match in enumerate(matches):
                 if count == 0:
                     print(f">>>{count}. {each_match[0]} (score: {each_match[1]})")
