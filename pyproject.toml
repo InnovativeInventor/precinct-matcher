@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Monadic election precinct matcher for gerrymandering data collection and research at MGGG"
 authors = ["Max Fan <theinnovativeinventor@gmail.com>"]
 license = "MIT License"
+readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.8"
