@@ -1,30 +1,40 @@
 ## (monadic) Precinct Matcher
 Matching election data to shapefiles is hard.
 It is usually context-dependent and implemented on a case-by-case basis.
-This attempts to make life easier
+This attempts to make life easier for everyone who has to deal with precinct matching.
 
 ## Install
 
 ``` bash
 pip install pmatcher
 ```
+## Benchmarks (on real data)
+VEST releases its precincts with VTD codes and county FIPS codes.
+To validate this approach, I ran the matcher on known, good data.
+
+Results (in % accuracy):
+``` 
+Exact match 0.9444831591173054
+Insensitive match 0.9444831591173054
+Insensitive stripped match 0.9932636469221835
+Aggressive insensitive stripped match 0.9983739837398374
+```
 
 ## Implemented Methods
-
-#### matcher.default()
+- `matcher.default()`
 Applies exact, insensitive, stripped, and weighted_manual in that order.
-All batteries included
+All batteries included!
 
-#### matcher.exact()
+- `matcher.exact()`
 Matches exact strings
 
-#### matcher.insensitive()
+- `matcher.insensitive()`
 Matches strings (case-insensitive )
 
-#### matcher.stripped()
+- `matcher.insensitive_stripped()`
 Matches strings with special characters removed (e.g.`()`, `#`, `-`)
 
-#### matcher.weighted_manual()
+- `matcher.weighted_manual()`
 Uses a weighted levenshtein algorithm.
 First looks for token-distance, followed by token word distance for tiebreaking.
 
@@ -33,6 +43,7 @@ First looks for token-distance, followed by token word distance for tiebreaking.
 ``` python
 matcher = PrecinctMatcher(list_1, list_2)
 matcher.default()
+mapping = matcher.result
 ```
 
 ``` python
@@ -41,5 +52,6 @@ matcher.exact()
 matcher.insensitive()
 matcher.insensitive_stripped()
 matcher.weighted_manual()
+mapping = matcher.result
 ```
 
