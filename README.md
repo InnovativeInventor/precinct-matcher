@@ -42,17 +42,17 @@ First looks for token-distance, followed by token word distance for tiebreaking.
 ## Example usage
 
 ``` python
+from pmatcher import PrecinctMatcher
 matcher = PrecinctMatcher(list_1, list_2)
-matcher.default()
-mapping = matcher.result
+mapping = matcher.default()
 ```
 
 ``` python
+from pmatcher import PrecinctMatcher
 matcher = PrecinctMatcher(list_1, list_2)
 matcher.exact()
 matcher.insensitive()
 matcher.insensitive_stripped()
-matcher.weighted_manual()
-mapping = matcher.result
+mapping = matcher.weighted_manual()
 ```
 
