@@ -1,6 +1,7 @@
 ## (monadic) Precinct Matcher
 Matching election data to shapefiles is hard.
-It is usually context-dependent and implemented on a case-by-case basis.
+It is usually context-dependent and implemented on a project-by-project basis.
+It also sometimes involves some manual labor.
 This attempts to make life easier for everyone who has to deal with precinct matching.
 
 ## Install
