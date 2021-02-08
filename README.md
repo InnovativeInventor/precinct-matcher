@@ -39,6 +39,13 @@ Matches strings with special characters removed (e.g.`()`, `#`, `-`).
 Uses a weighted levenshtein algorithm.
 First looks for token-distance, followed by token word distance for tiebreaking.
 
+### Saving and loading progress
+- `matcher.save_progress("progress.json")`
+Saves progress/mapping to a json file.
+
+- `matcher.load_progress("progress.json")`
+Loads progress/mapping from a json file.
+
 ## Example usage
 
 ``` python
