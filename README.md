@@ -27,13 +27,13 @@ Applies exact, insensitive, stripped, and weighted_manual in that order.
 All batteries included!
 
 - `matcher.exact()`
-Matches exact strings
+Matches exact strings.
 
 - `matcher.insensitive()`
-Matches strings (case-insensitive )
+Matches strings (case-insensitive).
 
 - `matcher.insensitive_stripped()`
-Matches strings with special characters removed (e.g.`()`, `#`, `-`)
+Matches strings with special characters removed (e.g.`()`, `#`, `-`).
 
 - `matcher.weighted_manual()`
 Uses a weighted levenshtein algorithm.
