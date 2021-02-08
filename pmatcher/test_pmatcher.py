@@ -28,12 +28,26 @@ def test_init():
     assert prev_len < len(matcher.results)
     prev_len = len(matcher.results)
 
-    assert matcher.stripped()
-    assert prev_len < len(matcher.results)
-    prev_len = len(matcher.results)
-
     assert matcher.insensitive_stripped()
     assert prev_len < len(matcher.results)
 
+    assert not matcher.primary
+    assert not matcher.secondary
+
+def test_write():
+    matcher = PrecinctMatcher(test_primary, test_secondary)
+
+    assert matcher.exact()
+    assert matcher.results
+    assert matcher.insensitive()
+    assert matcher.insensitive_stripped()
+    assert matcher.results
+    assert not matcher.primary
+    assert not matcher.secondary
+
+    matcher.save_progress("progress.json")
+    matcher = PrecinctMatcher([], [])
+    matcher.load_progress("progress.json")
+    assert matcher.results
     assert not matcher.primary
     assert not matcher.secondary

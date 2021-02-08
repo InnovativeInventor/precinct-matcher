@@ -1,5 +1,6 @@
 from fuzzywuzzy import fuzz, process
 from typing import List
+import json
 import difflib
 import string
 
@@ -213,6 +214,23 @@ class PrecinctMatcher:
 
     def spot_check(self):
         pass
+
+    def load_progress(self, filename: str):
+        with open(filename) as f:
+            data = json.load(f)
+
+        self.primary = data["primary"]
+        self.secondary = data["secondary"]
+        self.results = data["results"]
+
+    def save_progress(self, filename: str):
+        data = {}
+
+        data["primary"] = self.primary
+        data["secondary"] = self.secondary
+        data["results"] = self.results
+        with open(filename, "w") as f:
+            json.dump(data, f)
 
     def remaining(self):
         """
