@@ -30,7 +30,7 @@ class PrecinctMatcher:
         Default matching, with all the batteries included.
         """
         self.exact()
-        self.insensitive_stripped()
+        self.insensitive_normalized()
         self.stripped()
 
         if self.primary:
@@ -106,9 +106,9 @@ class PrecinctMatcher:
         """
         return self.normalize_match(lambda x: x.lower())
 
-    def insensitive_stripped(self, aggressive=False):
+    def insensitive_normalized(self, aggressive=False):
         """
-        Strip characters with insensitive matching. See insensitive() and _stripper() for more.
+        Normalize and strip characters with insensitive matching. See insensitive() and _stripper() for more.
         """
         if aggressive:
             return self.normalize_match(self._normalize, acceptable=ACCEPTABLE_DIFFERENCES, cd=True)

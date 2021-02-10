@@ -28,7 +28,7 @@ def test_init():
     assert prev_len < len(matcher.results)
     prev_len = len(matcher.results)
 
-    assert matcher.insensitive_stripped()
+    assert matcher.insensitive_normalized()
     assert prev_len < len(matcher.results)
 
     assert not matcher.primary
@@ -40,7 +40,7 @@ def test_write():
     assert matcher.exact()
     assert matcher.results
     assert matcher.insensitive()
-    assert matcher.insensitive_stripped()
+    assert matcher.insensitive_normalized()
     assert matcher.results
     assert not matcher.primary
     assert not matcher.secondary

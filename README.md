@@ -17,13 +17,13 @@ Results (in % accuracy):
 ``` 
 Exact match 0.9444831591173054
 Insensitive match 0.9444831591173054
-Insensitive stripped match 0.9932636469221835
-Aggressive insensitive stripped match 0.9983739837398374
+Insensitive normalized match 0.9932636469221835
+Aggressive insensitive normalized match 0.9983739837398374
 ```
 
 ## Implemented Methods
 - `matcher.default()`
-Applies exact, insensitive, stripped, and weighted_manual in that order.
+Applies exact, insensitive, normalized, and weighted_manual in that order.
 All batteries included!
 
 - `matcher.exact()`
@@ -32,7 +32,7 @@ Matches exact strings.
 - `matcher.insensitive()`
 Matches strings (case-insensitive).
 
-- `matcher.insensitive_stripped()`
+- `matcher.insensitive_normalized()`
 Matches strings with special characters removed (e.g.`()`, `#`, `-`).
 
 - `matcher.weighted_manual()`
@@ -59,7 +59,8 @@ from pmatcher import PrecinctMatcher
 matcher = PrecinctMatcher(list_1, list_2)
 matcher.exact()
 matcher.insensitive()
-matcher.insensitive_stripped()
+matcher.insensitive_normalized()
+matcher.insensitive_normalized(aggressive=True)
 mapping = matcher.weighted_manual()
 ```
 

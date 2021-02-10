@@ -12,7 +12,7 @@ def accuracy(mapping: Dict[str, str]):
     print("Exact match", len(matcher.exact())/size)
     print("Insensitive match", len(matcher.insensitive())/size)
     print("Insensitive stripped match", len(matcher.insensitive_stripped())/size)
-    print("Aggressive insensitive stripped match", len(matcher.insensitive_stripped(aggressive=True))/size)
+    print("Aggressive insensitive normalized match", len(matcher.insensitive_normalized(aggressive=True))/size)
     print("Remaining", len(matcher.primary))
 
     # print("Manual", len(matcher.weighted_manual())/size)
