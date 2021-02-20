@@ -31,8 +31,7 @@ class PrecinctMatcher:
         """
         self.exact()
         self.insensitive_normalized()
-        self.stripped()
-
+        self.insensitive_normalized(aggressive=True)
         if self.primary:
             return self.weighted_manual()
         else:
