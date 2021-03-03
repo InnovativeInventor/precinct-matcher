@@ -186,7 +186,7 @@ class PrecinctMatcher:
                 else:
                     print(f"   {count}. '{each_match}' (score: {score})")
             else:
-                print("Please select (enter=default):", end = " ")
+                print("Please select (enter=default, s to skip):", end = " ")
                 response = input()
 
             if response == "":
