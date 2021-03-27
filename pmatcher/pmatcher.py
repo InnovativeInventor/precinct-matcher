@@ -5,7 +5,7 @@ import difflib
 import string
 
 
-BAD_TOKENS = ["voting district", "-", "#", "(", ")", ",", "twp", "township", "/"]
+BAD_TOKENS = ["voting district", "-", "#", "(", ")", ",", "twp", "township", "/", "'"]
 # COMMON_REPLACEMENTS = {"pct": "precinct", "division": "district", "wd": "ward"}
 COMMON_REPLACEMENTS = {"pct": "precinct",
                        "division": "district",
@@ -14,6 +14,7 @@ COMMON_REPLACEMENTS = {"pct": "precinct",
                        "d": "district",
                        "boro": "borough",
                        "twp": "township",
+                       "tp": "township",
                        "first": "1",
                        "second": "2",
                        "third": "3",
@@ -33,21 +34,38 @@ COMMON_REPLACEMENTS = {"pct": "precinct",
                        "8th": "8",
                        "9th": "9",
                        "10th": "10",
-                       "N":"north",
-                       "E.":"east",
-                       "S.":"south",
-                       "W.":"west",
-                       "I": "1",
-                       "II": "2",
-                       "III": "3",
-                       "No.": "number",
+                       "one": "1",
+                       "two": "2",
+                       "three": "3",
+                       "four": "4",
+                       "five": "5",
+                       "six": "6",
+                       "seven": "7",
+                       "eight": "8",
+                       "nine": "9",
+                       "ten": "10",
+                       "n":"north",
+                       "e":"east",
+                       "s":"south",
+                       "w":"west",
+                       "i": "1",
+                       "ii": "2",
+                       "iii": "3",
+                       "no": "number",
                        "st": "street",
-                       "st.": "street"
+                       "ht": "heights",
+                       "hl": "hills",
+                       "pk": "park",
+                       "mt": "mountain",
+                       "mount": "mountain",
+                       "ind": "independent"
                        }
 
-ACCEPTABLE_DIFFERENCES = set(["district", "ward", "precinct", "borough"])
+ACCEPTABLE_DIFFERENCES = set(["district", "ward", "precinct", "borough", "number"])
 # TODO: Check with ppl about "twp" and if it is ok to map ward to precinct
-AGGRESSIVE_REPLACEMENTS = {"wd": "precinct", "ward": "precinct"} # never used
+AGGRESSIVE_REPLACEMENTS = {"wd": "precinct",
+                           "ward": "precinct"
+                           } # never used
 
 class PrecinctMatcher:
     def __init__(self, primary: List[str], secondary: List[str]):
@@ -162,6 +180,7 @@ class PrecinctMatcher:
 
         for each_term, each_replacement in common_replacements.items():
             string = self._replace_token(string, each_term, each_replacement)
+            string = self._replace_token(string, each_term + ".", each_replacement)
 
         tokens = string.split()
         for count, each_token in enumerate(tokens):
