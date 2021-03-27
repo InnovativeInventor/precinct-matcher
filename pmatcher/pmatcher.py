@@ -5,7 +5,7 @@ import difflib
 import string
 
 
-BAD_TOKENS = ["voting district", "-", "#", "(", ")", ",", "twp", "township"]
+BAD_TOKENS = ["voting district", "-", "#", "(", ")", ",", "twp", "township", "/"]
 # COMMON_REPLACEMENTS = {"pct": "precinct", "division": "district", "wd": "ward"}
 COMMON_REPLACEMENTS = {"pct": "precinct",
                        "division": "district",
@@ -32,7 +32,18 @@ COMMON_REPLACEMENTS = {"pct": "precinct",
                        "7th": "7",
                        "8th": "8",
                        "9th": "9",
-                       "0th": "0"}
+                       "10th": "10",
+                       "N":"north",
+                       "E.":"east",
+                       "S.":"south",
+                       "W.":"west",
+                       "I": "1",
+                       "II": "2",
+                       "III": "3",
+                       "No.": "number",
+                       "st": "street",
+                       "st.": "street"
+                       }
 
 ACCEPTABLE_DIFFERENCES = set(["district", "ward", "precinct", "borough"])
 # TODO: Check with ppl about "twp" and if it is ok to map ward to precinct
@@ -147,7 +158,7 @@ class PrecinctMatcher:
         string = string.lower()
 
         for each_bad_token in bad_tokens:
-            string = string.replace(each_bad_token, "")
+            string = string.replace(each_bad_token, " ")
 
         for each_term, each_replacement in common_replacements.items():
             string = self._replace_token(string, each_term, each_replacement)
@@ -159,7 +170,7 @@ class PrecinctMatcher:
             except ValueError:
                 pass
 
-        return " ".join(tokens)
+        return " ".join([token.rstrip() for token in tokens if token.rstrip()])
 
     def _replace_token(self, string: str, token: str, replacement: str):
         """
