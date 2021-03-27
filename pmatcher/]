@@ -7,34 +7,8 @@ import string
 
 BAD_TOKENS = ["voting district", "-", "#", "(", ")", ",", "twp", "township"]
 # COMMON_REPLACEMENTS = {"pct": "precinct", "division": "district", "wd": "ward"}
-COMMON_REPLACEMENTS = {"pct": "precinct",
-                       "division": "district",
-                       "wd": "ward",
-                       "dist": "district",
-                       "d": "district",
-                       "boro": "borough",
-                       "twp": "township",
-                       "first": "1",
-                       "second": "2",
-                       "third": "3",
-                       "fourth": "4",
-                       "fifth": "5",
-                       "sixth": "6",
-                       "seventh": "7",
-                       "eighth": "8",
-                       "ninth": "9",
-                       "1st": "1",
-                       "2nd": "2",
-                       "3rd": "3",
-                       "4th": "4",
-                       "5th": "5",
-                       "6th": "6",
-                       "7th": "7",
-                       "8th": "8",
-                       "9th": "9",
-                       "0th": "0"}
-
-ACCEPTABLE_DIFFERENCES = set(["district", "ward", "precinct", "borough"])
+COMMON_REPLACEMENTS = {"pct": "precinct", "division": "district", "wd": "ward", "dist": "district", "d": "district", "boro": "borough"}
+ACCEPTABLE_DIFFERENCES = set(["district", "ward", "precinct"])
 # TODO: Check with ppl about "twp" and if it is ok to map ward to precinct
 AGGRESSIVE_REPLACEMENTS = {"wd": "precinct", "ward": "precinct"} # never used
 
