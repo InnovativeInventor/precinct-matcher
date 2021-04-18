@@ -11,6 +11,7 @@ COMMON_REPLACEMENTS = {"pct": "precinct",
                        "division": "district",
                        "wd": "ward",
                        "dist": "district",
+                       "dst": "district",
                        "d": "district",
                        "boro": "borough",
                        "twp": "township",
@@ -34,6 +35,9 @@ COMMON_REPLACEMENTS = {"pct": "precinct",
                        "8th": "8",
                        "9th": "9",
                        "10th": "10",
+                       "11th": "11",
+                       "12th": "12",
+                       "13th": "13",
                        "one": "1",
                        "two": "2",
                        "three": "3",
@@ -45,9 +49,13 @@ COMMON_REPLACEMENTS = {"pct": "precinct",
                        "nine": "9",
                        "ten": "10",
                        "n":"north",
+                       "northern": "north",
                        "e":"east",
+                       "eastern": "east",
                        "s":"south",
+                       "southern": "south",
                        "w":"west",
+                       "western": "west",
                        "i": "1",
                        "ii": "2",
                        "iii": "3",
@@ -58,13 +66,13 @@ COMMON_REPLACEMENTS = {"pct": "precinct",
                        "pk": "park",
                        "mt": "mountain",
                        "mount": "mountain",
-                       "ind": "independent"
+                       "ind": "independent",
+                       "sq": "square",
                        }
 
 ACCEPTABLE_DIFFERENCES = set(["district", "ward", "precinct", "borough", "number"])
 # TODO: Check with ppl about "twp" and if it is ok to map ward to precinct
-AGGRESSIVE_REPLACEMENTS = {"wd": "precinct",
-                           "ward": "precinct"
+AGGRESSIVE_REPLACEMENTS = {"m": "middle" # kinda aggressive
                            } # never used
 
 class PrecinctMatcher:
@@ -80,7 +88,7 @@ class PrecinctMatcher:
         self.results: Dict[str, str] = {}
 
 
-    def default(self):
+    def default(self, n=6):
         """
         Default matching, with all the batteries included.
         """
@@ -88,7 +96,7 @@ class PrecinctMatcher:
         self.insensitive_normalized()
         self.insensitive_normalized(aggressive=True)
         if self.primary:
-            return self.weighted_manual()
+            return self.weighted_manual(n=n)
         else:
             return self.results
 
@@ -254,7 +262,11 @@ class PrecinctMatcher:
                     continue
 
             primary_loc = normalized_primary.index(each_string)
-            secondary_loc = normalized_secondary.index(matches[match][0])
+            try:
+                secondary_loc = normalized_secondary.index(matches[match][0])
+            except IndexError as e:
+                print("Error", e)
+                return self.results
 
             if verbose:
                 print(f"Matched '{self.primary[primary_loc]}' with '{self.secondary[secondary_loc]}'.")

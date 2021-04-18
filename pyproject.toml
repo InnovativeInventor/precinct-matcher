@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pmatcher"
-version = "0.1.7"
+version = "0.1.12"
 description = "Monadic election precinct matcher for gerrymandering data collection and research at MGGG"
 authors = ["Max Fan <theinnovativeinventor@gmail.com>"]
 license = "MIT License"
